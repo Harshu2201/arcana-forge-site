@@ -76,13 +76,67 @@ export const Hero = () => {
             className="hero-image flex justify-center lg:justify-end order-1 lg:order-1"
           >
             <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-neon-teal to-neon-violet rounded-3xl blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
-              <img
+              {/* Animated glow rings */}
+              <motion.div
+                className="absolute inset-0 rounded-3xl blur-2xl"
+                animate={{
+                  scale: [1, 1.05, 1],
+                  opacity: [0.5, 0.7, 0.5],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                style={{
+                  background: "radial-gradient(circle, rgba(0,255,255,0.4) 0%, rgba(153,102,255,0.4) 100%)",
+                }}
+              />
+              
+              <motion.div
+                className="absolute -inset-4 rounded-3xl"
+                animate={{
+                  rotate: [0, 360],
+                }}
+                transition={{
+                  duration: 20,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                style={{
+                  background: "conic-gradient(from 0deg, transparent 0%, rgba(0,255,255,0.3) 50%, transparent 100%)",
+                  filter: "blur(20px)",
+                }}
+              />
+              
+              <motion.img
                 src={profileImage}
                 alt="Prof. Shrikant R. Dhavale — portrait"
-                className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 object-cover rounded-3xl border-2 border-glass-border shadow-2xl"
+                className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[28rem] lg:h-[28rem] object-cover rounded-3xl border-2 border-glass-border shadow-2xl"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
               />
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+              
+              {/* Floating particles around image */}
+              {[...Array(8)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 bg-primary rounded-full"
+                  style={{
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                  }}
+                  animate={{
+                    y: [0, -20, 0],
+                    opacity: [0.3, 1, 0.3],
+                  }}
+                  transition={{
+                    duration: 3 + Math.random() * 2,
+                    repeat: Infinity,
+                    delay: Math.random() * 2,
+                  }}
+                />
+              ))}
             </div>
           </motion.div>
 
@@ -107,34 +161,60 @@ export const Hero = () => {
               style={{ opacity }}
               className="flex flex-wrap gap-4"
             >
-              <Button
-                size="lg"
-                className="hero-cta glass-button group"
-                onClick={() => window.open("https://www.linkedin.com/in/shrikant-dhavale-107a551ba", "_blank")}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <FileText className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                View CV
-              </Button>
+                <Button
+                  size="lg"
+                  className="hero-cta glass-button group relative overflow-hidden"
+                  onClick={() => window.open("https://www.linkedin.com/in/shrikant-dhavale-107a551ba", "_blank")}
+                >
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-neon-teal/20 to-neon-violet/20"
+                    animate={{
+                      x: ["-100%", "100%"],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
+                  <FileText className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform relative z-10" />
+                  <span className="relative z-10">View CV</span>
+                </Button>
+              </motion.div>
 
-              <Button
-                size="lg"
-                variant="outline"
-                className="hero-cta glass-button"
-                onClick={scrollToContact}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <Mail className="mr-2 h-5 w-5" />
-                Contact
-              </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="hero-cta glass-button"
+                  onClick={scrollToContact}
+                >
+                  <Mail className="mr-2 h-5 w-5" />
+                  Contact
+                </Button>
+              </motion.div>
 
-              <Button
-                size="lg"
-                variant="ghost"
-                className="hero-cta glass-button"
-                onClick={() => window.open("https://www.linkedin.com/in/shrikant-dhavale-107a551ba", "_blank")}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <Linkedin className="mr-2 h-5 w-5" />
-                LinkedIn
-              </Button>
+                <Button
+                  size="lg"
+                  variant="ghost"
+                  className="hero-cta glass-button"
+                  onClick={() => window.open("https://www.linkedin.com/in/shrikant-dhavale-107a551ba", "_blank")}
+                >
+                  <Linkedin className="mr-2 h-5 w-5" />
+                  LinkedIn
+                </Button>
+              </motion.div>
             </motion.div>
 
             <motion.div

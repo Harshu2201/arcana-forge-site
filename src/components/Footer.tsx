@@ -92,12 +92,12 @@ export const Footer = () => {
           <p className="text-sm text-muted-foreground text-center sm:text-left">
             © {currentYear} Prof. Shrikant R. Dhavale — Site Developed By{" "}
             <a
-              href="https://www.instagram.com/harshad_pakhale_01"
+              href="https://www.instagram.com/harshad.h.pakhale.01"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline"
             >
-              @harshad_pakhale_01
+              @harshad.h.pakhale.01
             </a>
           </p>
           <div className="flex gap-4 text-sm">

@@ -7,6 +7,8 @@ import { Books } from "@/components/Books";
 import { Courses } from "@/components/Courses";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { ParticleBackground } from "@/components/ParticleBackground";
+import { FloatingElements } from "@/components/FloatingElements";
 
 const Index = () => {
   const [showLoader, setShowLoader] = useState(true);
@@ -27,14 +29,18 @@ const Index = () => {
     <>
       {showLoader && <Loader onComplete={handleLoaderComplete} />}
       
-      <main className="min-h-screen bg-background">
-        <Hero />
-        <About />
-        <SubjectsGrid />
-        <Books />
-        <Courses />
-        <Contact />
-        <Footer />
+      <main className="min-h-screen bg-background relative">
+        <ParticleBackground />
+        <FloatingElements />
+        <div className="relative z-10">
+          <Hero />
+          <About />
+          <SubjectsGrid />
+          <Books />
+          <Courses />
+          <Contact />
+          <Footer />
+        </div>
       </main>
     </>
   );
