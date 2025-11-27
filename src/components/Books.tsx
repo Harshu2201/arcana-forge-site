@@ -51,18 +51,21 @@ export const Books = () => {
             {books.map((book, index) => (
               <motion.div
                 key={book.title}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.9 }}
+                transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
+                whileHover={{ y: -8 }}
               >
-                <Card className="glass-panel border-glass-border overflow-hidden group h-full">
+                <Card className="glass-panel border-glass-border overflow-hidden group h-full hover:border-primary/50 transition-all duration-500">
                   <div className="relative overflow-hidden">
-                    <img
+                    <motion.img
                       src={book.image}
                       alt={`${book.title} — book cover`}
-                      className="w-full h-64 object-contain bg-muted/30 p-6 group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-64 object-contain bg-muted/30 p-6"
+                      whileHover={{ scale: 1.05, rotate: 2 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
                   <CardHeader>
                     <div className="flex items-start justify-between mb-2">

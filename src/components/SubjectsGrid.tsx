@@ -130,19 +130,25 @@ export const SubjectsGrid = () => {
             {filteredSubjects.map((subject, index) => (
               <motion.div
                 key={subject.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 40, scale: 0.95 }}
+                transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
+                whileHover={{ y: -6, scale: 1.02 }}
               >
-                <Card className="glass-panel border-glass-border h-full hover:border-primary/50 transition-all duration-300 group">
+                <Card className="glass-panel border-glass-border h-full hover:border-primary/50 transition-all duration-500 group">
                   <CardHeader>
                     <div className="flex items-start justify-between mb-3">
-                      <subject.icon className="w-10 h-10 text-primary group-hover:scale-110 transition-transform" />
+                      <motion.div
+                        whileHover={{ rotate: 15, scale: 1.1 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <subject.icon className="w-10 h-10 text-primary" />
+                      </motion.div>
                       <Badge variant="secondary" className="glass-button">
                         {subject.category}
                       </Badge>
                     </div>
-                    <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                    <CardTitle className="text-xl group-hover:text-primary transition-colors duration-300">
                       {subject.title}
                     </CardTitle>
                     <CardDescription className="text-muted-foreground">
