@@ -13,7 +13,7 @@ const courses = [
     logo: udemyLogo,
     description: "Comprehensive online course covering fundamental mechanical engineering principles for beginners.",
     features: ["Video Lectures", "Practical Examples", "Quizzes & Assessments", "Certificate of Completion"],
-    students: "500+",
+    students: "7000+",
     link: "https://www.udemy.com/course/basic-mechanical-engineering/",
   },
   {
@@ -51,24 +51,27 @@ export const Courses = () => {
             {courses.map((course, index) => (
               <motion.div
                 key={course.title}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+                initial={{ opacity: 0, scale: 0.9, y: 40 }}
+                animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.9, y: 40 }}
+                transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
+                whileHover={{ y: -8 }}
               >
-                <Card className="glass-panel border-glass-border h-full group hover:border-primary/50 transition-all duration-300">
+                <Card className="glass-panel border-glass-border h-full group hover:border-primary/50 transition-all duration-500 hover:shadow-2xl">
                   <CardHeader>
                     <div className="flex items-center justify-between mb-4">
-                      <img
+                      <motion.img
                         src={course.logo}
                         alt={`${course.platform} logo`}
                         className="h-10 object-contain"
+                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        transition={{ duration: 0.3 }}
                       />
                       <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Users className="w-4 h-4" />
-                        <span>{course.students} students</span>
+                        <span className="font-semibold">{course.students} students</span>
                       </div>
                     </div>
-                    <CardTitle className="text-2xl group-hover:text-primary transition-colors">
+                    <CardTitle className="text-2xl group-hover:text-primary transition-colors duration-300">
                       {course.title}
                     </CardTitle>
                     <CardDescription className="text-base">

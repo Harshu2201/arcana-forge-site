@@ -114,31 +114,10 @@ export const Hero = () => {
               <motion.img
                 src={profileImage}
                 alt="Prof. Shrikant R. Dhavale — portrait"
-                className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[28rem] lg:h-[28rem] object-cover rounded-3xl border-2 border-glass-border shadow-2xl"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
+                className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[28rem] lg:h-[28rem] object-cover rounded-3xl border-4 border-primary/20 shadow-2xl ring-2 ring-primary/10"
+                whileHover={{ scale: 1.02, borderColor: "rgba(var(--primary), 0.4)" }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
               />
-              
-              {/* Floating particles around image */}
-              {[...Array(8)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-2 h-2 bg-primary rounded-full"
-                  style={{
-                    top: `${Math.random() * 100}%`,
-                    left: `${Math.random() * 100}%`,
-                  }}
-                  animate={{
-                    y: [0, -20, 0],
-                    opacity: [0.3, 1, 0.3],
-                  }}
-                  transition={{
-                    duration: 3 + Math.random() * 2,
-                    repeat: Infinity,
-                    delay: Math.random() * 2,
-                  }}
-                />
-              ))}
             </div>
             
             {/* E-Cell MESWCOE Badge */}

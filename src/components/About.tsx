@@ -52,12 +52,18 @@ export const About = () => {
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                  transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                  className="text-center space-y-2 p-6 rounded-2xl bg-muted/30 hover:bg-muted/50 transition-colors"
+                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                  animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 20 }}
+                  transition={{ duration: 0.5, delay: 0.3 + index * 0.15, ease: "easeOut" }}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  className="text-center space-y-2 p-6 rounded-2xl bg-muted/30 hover:bg-muted/50 transition-all duration-300 cursor-pointer border border-transparent hover:border-primary/30"
                 >
-                  <stat.icon className="w-8 h-8 mx-auto text-primary animate-pulse-glow" />
+                  <motion.div
+                    whileHover={{ rotate: 360, scale: 1.2 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <stat.icon className="w-8 h-8 mx-auto text-primary" />
+                  </motion.div>
                   <div className="text-3xl font-bold text-gradient">{stat.value}</div>
                   <div className="text-sm text-muted-foreground">{stat.label}</div>
                 </motion.div>
