@@ -9,8 +9,8 @@ export const About = () => {
 
   const stats = [
     { icon: BookOpen, label: "Published Books", value: "2+" },
-    { icon: Users, label: "Students Taught", value: "1000+" },
-    { icon: Award, label: "Years Experience", value: "15+" },
+    { icon: Users, label: "Students Taught", value: "10000+" },
+    { icon: Award, label: "Years Experience", value: "13+" },
   ];
 
   return (
@@ -29,7 +29,7 @@ export const About = () => {
 
           <div className="glass-panel rounded-3xl p-8 sm:p-12 space-y-6">
             <p className="text-lg text-muted-foreground leading-relaxed">
-              As a dedicated engineering educator with over 15 years of experience, I am passionate about 
+              As a dedicated engineering educator with over 13 years of experience, I am passionate about 
               empowering the next generation of mechanical engineers and robotics enthusiasts. My journey in 
               academia has been driven by a commitment to bridging theoretical knowledge with practical 
               application.

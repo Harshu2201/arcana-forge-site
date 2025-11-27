@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { Button } from "@/components/ui/button";
 import { Linkedin, FileText, Mail } from "lucide-react";
 import profileImage from "@/assets/shrikant-profile.jpg";
+import ecellLogo from "@/assets/ecell-logo.png";
 
 export const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -74,7 +75,7 @@ export const Hero = () => {
           {/* Left: Profile Image */}
           <motion.div
             style={{ y }}
-            className="hero-image flex justify-center lg:justify-end order-1 lg:order-1"
+            className="hero-image flex flex-col items-center lg:items-end justify-center order-1 lg:order-1 gap-6"
           >
             <div className="relative group">
               {/* Animated glow rings */}
@@ -139,6 +140,24 @@ export const Hero = () => {
                 />
               ))}
             </div>
+            
+            {/* E-Cell MESWCOE Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              className="glass-panel rounded-2xl px-6 py-4 flex items-center gap-4 shadow-xl hover:shadow-2xl transition-shadow w-auto"
+            >
+              <img 
+                src={ecellLogo} 
+                alt="E-Cell MESWCOE Logo" 
+                className="w-12 h-12 object-contain"
+              />
+              <div className="text-left">
+                <p className="text-sm font-bold text-foreground">E-Cell MESWCOE</p>
+                <p className="text-xs text-muted-foreground">Faculty Incharge</p>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Right: Text Content */}
