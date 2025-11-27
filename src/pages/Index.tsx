@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Loader } from "@/components/Loader";
+import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { About } from "@/components/About";
 import { SubjectsGrid } from "@/components/SubjectsGrid";
@@ -32,6 +33,7 @@ const Index = () => {
       <main className="min-h-screen bg-background relative">
         <ParticleBackground />
         <FloatingElements />
+        <Header />
         <div className="relative z-10">
           <Hero />
           <About />

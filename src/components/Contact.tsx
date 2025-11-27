@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
-import { Mail, Linkedin, Send, Calendar } from "lucide-react";
+import { Mail, Linkedin, Send, Calendar, MessageCircle } from "lucide-react";
 import contactQR from "@/assets/contact-qr.jpg";
 
 export const Contact = () => {
@@ -53,6 +53,11 @@ export const Contact = () => {
     window.open(`mailto:?subject=${subject}&body=${body}`, "_blank");
   };
 
+  const handleWhatsApp = () => {
+    const message = encodeURIComponent("Hello Prof. Dhavale, I would like to connect with you regarding...");
+    window.open(`https://wa.me/918408956226?text=${message}`, "_blank");
+  };
+
   return (
     <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="container mx-auto">
@@ -81,20 +86,33 @@ export const Contact = () => {
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-2">
+                    <motion.div 
+                      className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                    >
+                      <motion.div 
+                        className="space-y-2"
+                        whileHover={{ scale: 1.01 }}
+                        transition={{ duration: 0.2 }}
+                      >
                         <Label htmlFor="name">Name *</Label>
                         <Input
                           id="name"
                           placeholder="Your full name"
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          className="glass-button"
+                          className="glass-button transition-all duration-300 focus:ring-2 focus:ring-primary"
                           required
                           maxLength={100}
                         />
-                      </div>
-                      <div className="space-y-2">
+                      </motion.div>
+                      <motion.div 
+                        className="space-y-2"
+                        whileHover={{ scale: 1.01 }}
+                        transition={{ duration: 0.2 }}
+                      >
                         <Label htmlFor="email">Email *</Label>
                         <Input
                           id="email"
@@ -102,20 +120,25 @@ export const Contact = () => {
                           placeholder="your.email@example.com"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="glass-button"
+                          className="glass-button transition-all duration-300 focus:ring-2 focus:ring-primary"
                           required
                           maxLength={255}
                         />
-                      </div>
-                    </div>
+                      </motion.div>
+                    </motion.div>
 
-                    <div className="space-y-2">
+                    <motion.div 
+                      className="space-y-2"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
                       <Label htmlFor="subject">Subject</Label>
                       <Select
                         value={formData.subject}
                         onValueChange={(value) => setFormData({ ...formData, subject: value })}
                       >
-                        <SelectTrigger id="subject" className="glass-button">
+                        <SelectTrigger id="subject" className="glass-button transition-all duration-300 focus:ring-2 focus:ring-primary">
                           <SelectValue placeholder="Select a subject" />
                         </SelectTrigger>
                         <SelectContent>
@@ -126,20 +149,26 @@ export const Contact = () => {
                           <SelectItem value="other">Other</SelectItem>
                         </SelectContent>
                       </Select>
-                    </div>
+                    </motion.div>
 
-                    <div className="space-y-2">
+                    <motion.div 
+                      className="space-y-2"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      whileHover={{ scale: 1.01 }}
+                    >
                       <Label htmlFor="message">Message *</Label>
                       <Textarea
                         id="message"
                         placeholder="Your message..."
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="glass-button min-h-[150px]"
+                        className="glass-button min-h-[150px] transition-all duration-300 focus:ring-2 focus:ring-primary"
                         required
                         maxLength={1000}
                       />
-                    </div>
+                    </motion.div>
 
                     <div className="flex items-center space-x-2">
                       <Checkbox
@@ -157,10 +186,18 @@ export const Contact = () => {
                       </label>
                     </div>
 
-                    <Button type="submit" className="w-full glass-button group" size="lg">
-                      Send Message
-                      <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </Button>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 group shadow-lg" size="lg">
+                        Send Message
+                        <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </motion.div>
                   </form>
                 </CardContent>
               </Card>
@@ -173,32 +210,49 @@ export const Contact = () => {
                   <CardTitle>Connect</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <Button
-                    variant="outline"
-                    className="w-full glass-button justify-start"
-                    onClick={() => window.open("https://www.linkedin.com/in/shrikant-dhavale-107a551ba", "_blank")}
-                  >
-                    <Linkedin className="mr-2 h-4 w-4" />
-                    LinkedIn Profile
-                  </Button>
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Button
+                      variant="outline"
+                      className="w-full glass-button justify-start hover:bg-primary/10"
+                      onClick={handleWhatsApp}
+                    >
+                      <MessageCircle className="mr-2 h-4 w-4 text-green-500" />
+                      WhatsApp
+                    </Button>
+                  </motion.div>
                   
-                  <Button
-                    variant="outline"
-                    className="w-full glass-button justify-start"
-                    onClick={handleRequestLecture}
-                  >
-                    <Calendar className="mr-2 h-4 w-4" />
-                    Request a Lecture
-                  </Button>
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Button
+                      variant="outline"
+                      className="w-full glass-button justify-start hover:bg-primary/10"
+                      onClick={() => window.open("https://www.linkedin.com/in/shrikant-dhavale-107a551ba", "_blank")}
+                    >
+                      <Linkedin className="mr-2 h-4 w-4" />
+                      LinkedIn Profile
+                    </Button>
+                  </motion.div>
+                  
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Button
+                      variant="outline"
+                      className="w-full glass-button justify-start hover:bg-primary/10"
+                      onClick={handleRequestLecture}
+                    >
+                      <Calendar className="mr-2 h-4 w-4" />
+                      Request a Lecture
+                    </Button>
+                  </motion.div>
 
-                  <Button
-                    variant="outline"
-                    className="w-full glass-button justify-start"
-                    onClick={() => window.open("https://shrikantdhavale.wordpress.com/about/", "_blank")}
-                  >
-                    <Mail className="mr-2 h-4 w-4" />
-                    WordPress
-                  </Button>
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Button
+                      variant="outline"
+                      className="w-full glass-button justify-start hover:bg-primary/10"
+                      onClick={() => window.open("https://shrikantdhavale.wordpress.com/about/", "_blank")}
+                    >
+                      <Mail className="mr-2 h-4 w-4" />
+                      WordPress
+                    </Button>
+                  </motion.div>
                 </CardContent>
               </Card>
 
