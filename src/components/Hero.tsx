@@ -56,8 +56,9 @@ export const Hero = () => {
 
   return (
     <section
+      id="hero"
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-20"
     >
       {/* Animated background */}
       <motion.div
@@ -167,7 +168,7 @@ export const Hero = () => {
               >
                 <Button
                   size="lg"
-                  className="hero-cta glass-button group relative overflow-hidden"
+                  className="hero-cta bg-primary text-primary-foreground hover:bg-primary/90 group relative overflow-hidden shadow-lg"
                   onClick={() => window.open("https://www.linkedin.com/in/shrikant-dhavale-107a551ba", "_blank")}
                 >
                   <motion.div
@@ -182,7 +183,21 @@ export const Hero = () => {
                     }}
                   />
                   <FileText className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform relative z-10" />
-                  <span className="relative z-10">View CV</span>
+                  <span className="relative z-10 font-semibold">View CV</span>
+                </Button>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  size="lg"
+                  className="hero-cta bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-lg"
+                  onClick={scrollToContact}
+                >
+                  <Mail className="mr-2 h-5 w-5" />
+                  <span className="font-semibold">Contact</span>
                 </Button>
               </motion.div>
 
@@ -193,26 +208,11 @@ export const Hero = () => {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="hero-cta glass-button"
-                  onClick={scrollToContact}
-                >
-                  <Mail className="mr-2 h-5 w-5" />
-                  Contact
-                </Button>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  size="lg"
-                  variant="ghost"
-                  className="hero-cta glass-button"
+                  className="hero-cta border-2 border-primary/50 hover:bg-primary/10 hover:border-primary shadow-lg"
                   onClick={() => window.open("https://www.linkedin.com/in/shrikant-dhavale-107a551ba", "_blank")}
                 >
                   <Linkedin className="mr-2 h-5 w-5" />
-                  LinkedIn
+                  <span className="font-semibold">LinkedIn</span>
                 </Button>
               </motion.div>
             </motion.div>

@@ -1,69 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Sphere, MeshDistortMaterial } from "@react-three/drei";
-import * as THREE from "three";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-
-const AnimatedSphere = () => {
-  const meshRef = useRef<THREE.Mesh>(null);
-
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.getElapsedTime() * 0.2;
-      meshRef.current.rotation.y = state.clock.getElapsedTime() * 0.3;
-    }
-  });
-
-  return (
-    <Sphere ref={meshRef} args={[1, 100, 100]} scale={2.5}>
-      <MeshDistortMaterial
-        color="#00ffff"
-        attach="material"
-        distort={0.3}
-        speed={2}
-        roughness={0}
-        metalness={0.8}
-        transparent
-        opacity={0.7}
-      />
-    </Sphere>
-  );
-};
-
-const ParticleField = () => {
-  const pointsRef = useRef<THREE.Points>(null);
-  const particleCount = 500;
-
-  const particles = useRef(
-    new Float32Array(particleCount * 3).map(() => (Math.random() - 0.5) * 20)
-  );
-
-  useFrame((state) => {
-    if (pointsRef.current) {
-      pointsRef.current.rotation.y = state.clock.getElapsedTime() * 0.05;
-    }
-  });
-
-  return (
-    <points ref={pointsRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={particleCount}
-          array={particles.current}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.05}
-        color="#00ffff"
-        transparent
-        opacity={0.6}
-        sizeAttenuation
-      />
-    </points>
-  );
-};
+import { Loader2, Brain, Cpu, Database } from "lucide-react";
 
 interface LoaderProps {
   onComplete: () => void;
@@ -105,38 +43,120 @@ export const Loader = ({ onComplete }: LoaderProps) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-background flex items-center justify-center">
-      <div className="absolute inset-0 bg-gradient-radial from-neon-teal/10 via-transparent to-transparent" />
-      
-      <div className="relative w-full h-full">
-        <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} intensity={1} />
-          <ParticleField />
-          <AnimatedSphere />
-        </Canvas>
-      </div>
+    <div className="fixed inset-0 z-50 bg-background flex items-center justify-center overflow-hidden">
+      {/* Animated gradient background */}
+      <motion.div 
+        className="absolute inset-0"
+        animate={{
+          background: [
+            "radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%)",
+            "radial-gradient(circle at 80% 50%, rgba(153, 102, 255, 0.1) 0%, transparent 50%)",
+            "radial-gradient(circle at 50% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%)",
+            "radial-gradient(circle at 50% 20%, rgba(153, 102, 255, 0.1) 0%, transparent 50%)",
+            "radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%)",
+          ]
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+      />
 
       <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-        <div className="text-center space-y-6 pointer-events-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-gradient animate-pulse-glow">
-            Initializing — Teaching Engine v1.0
-          </h2>
-          
-          <div className="w-64 h-2 bg-muted rounded-full overflow-hidden">
-            <div
-              className="h-full bg-gradient-to-r from-neon-teal to-neon-violet transition-all duration-300"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-
-          <Button
-            onClick={handleSkip}
-            variant="ghost"
-            className="glass-button text-foreground hover:text-primary"
+        {/* Main content */}
+        <div className="text-center space-y-8 pointer-events-auto px-4">
+          {/* Logo/Icon area */}
+          <motion.div 
+            className="relative w-32 h-32 mx-auto"
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            Skip Intro
-          </Button>
+            {/* Orbiting icons */}
+            <motion.div
+              className="absolute inset-0"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            >
+              <motion.div 
+                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                whileHover={{ scale: 1.2 }}
+              >
+                <div className="w-10 h-10 rounded-full bg-neon-teal/20 backdrop-blur-sm border border-neon-teal/50 flex items-center justify-center">
+                  <Brain className="w-5 h-5 text-neon-teal" />
+                </div>
+              </motion.div>
+              <motion.div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
+                <div className="w-10 h-10 rounded-full bg-neon-violet/20 backdrop-blur-sm border border-neon-violet/50 flex items-center justify-center">
+                  <Database className="w-5 h-5 text-neon-violet" />
+                </div>
+              </motion.div>
+              <motion.div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div className="w-10 h-10 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/50 flex items-center justify-center">
+                  <Cpu className="w-5 h-5 text-primary" />
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* Center icon */}
+            <motion.div 
+              className="absolute inset-0 flex items-center justify-center"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+            >
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-neon-teal/30 to-neon-violet/30 backdrop-blur-lg border border-glass-border flex items-center justify-center shadow-xl">
+                <Loader2 className="w-10 h-10 text-gradient animate-spin" />
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Title */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="space-y-2"
+          >
+            <h2 className="text-2xl md:text-4xl font-bold text-gradient">
+              Prof. Shrikant R. Dhavale
+            </h2>
+            <p className="text-sm md:text-base text-muted-foreground font-medium">
+              Engineering Educator • Robotics & Systems
+            </p>
+          </motion.div>
+          
+          {/* Progress bar */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="w-full max-w-md mx-auto space-y-3"
+          >
+            <div className="w-full h-2 bg-muted/30 rounded-full overflow-hidden backdrop-blur-sm border border-glass-border">
+              <motion.div
+                className="h-full bg-gradient-to-r from-neon-teal via-primary to-neon-violet"
+                initial={{ width: 0 }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.3 }}
+              />
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Initializing Portfolio System... {Math.round(progress)}%
+            </p>
+          </motion.div>
+
+          {/* Skip button */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.6 }}
+          >
+            <Button
+              onClick={handleSkip}
+              variant="ghost"
+              size="sm"
+              className="glass-button text-foreground hover:text-primary"
+            >
+              Skip Intro →
+            </Button>
+          </motion.div>
         </div>
       </div>
     </div>
